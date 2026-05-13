@@ -1,0 +1,14 @@
+{
+  "long_window": {"type": "int", "values": [80, 120, 200], "default": 120},
+  "mid_window": {"type": "int", "values": [30, 40, 60], "default": 40},
+  "short_window": {"type": "int", "values": [5, 10, 20], "default": 10},
+  "vol_window": {"type": "int", "values": [10, 20, 40], "default": 20},
+  "trend_threshold": {"type": "float", "values": [0.01, 0.02, 0.04], "default": 0.02},
+  "range_z_entry": {"type": "float", "values": [-0.8, -1.0, -1.5], "default": -1.0},
+  "high_vol_threshold": {"type": "float", "values": [0.02, 0.03, 0.04], "default": 0.03},
+  "uptrend_max_s": {"type": "float", "values": [0.7, 0.85, 1.0], "default": 1.0},
+  "range_max_s": {"type": "float", "values": [0.25, 0.45, 0.6], "default": 0.45},
+  "downtrend_max_s": {"type": "float", "values": [0.0, 0.05, 0.1], "default": 0.0},
+  "high_vol_max_s": {"type": "float", "values": [0.0, 0.1, 0.15, 0.2], "default": 0.15},
+  "max_daily_target_change": {"type": "float", "values": [0.2, 0.35, 0.5], "default": 0.35}
+}

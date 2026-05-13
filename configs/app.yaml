@@ -1,0 +1,10 @@
+project:
+  name: stock_strategy_lab
+  artifacts_dir: artifacts
+  experiments_dir: artifacts/experiments
+  strategy_registry_dir: artifacts/strategy_registry
+  default_timezone: Asia/Shanghai
+
+logging:
+  level: INFO
+

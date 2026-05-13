@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stock-strategy-lab"
+version = "0.1.0"
+description = "Multi-agent strategy research lab for A-share signal, allocation, and portfolio fusion workflows."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.7",
+    "PyYAML>=6.0",
+    "typer>=0.12",
+    "rich>=13.7",
+    "python-dotenv>=1.0",
+    "pandas>=2.2",
+    "pyarrow>=15.0",
+    "numpy>=1.26",
+    "openai>=1.50",
+]
+
+[project.optional-dependencies]
+quant = [
+    "numpy>=1.26",
+    "backtrader>=1.9.78.123",
+    "quantstats>=0.0.62",
+]
+agents = [
+    "deepagents>=0.2.0",
+    "langchain>=1.0.0",
+    "langchain-deepseek>=1.0.1",
+    "langchain-openai>=1.0.0",
+    "langgraph>=1.0.0",
+    "langgraph-checkpoint-sqlite>=3.0.0",
+]
+data = [
+    "akshare>=1.14",
+]
+dev = [
+    "pytest>=8.0",
+]
+
+[project.scripts]
+strategy-lab = "strategy_lab.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+strategy_lab = ["agents/prompts/*.md", "skills/**/*.md", "skills/**/*.py", "skills/**/*.json"]

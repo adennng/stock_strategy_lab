@@ -1,0 +1,32 @@
+{
+  "strategy_name": "example_regime_alpha_map_signal",
+  "strategy_class_name": "Strategy",
+  "created_by": "SignalAgent",
+  "strategy_structure": {
+    "regime_detector": "long trend, mid return and realized volatility regime detector",
+    "regime_alpha_policy": {
+      "uptrend": "alpha_uptrend_trend_momentum",
+      "range": "alpha_range_mean_reversion",
+      "downtrend": "alpha_downtrend_flat",
+      "high_vol": "alpha_high_vol_defensive"
+    },
+    "regime_alpha_map": {
+      "uptrend": "alpha_uptrend_trend_momentum",
+      "range": "alpha_range_mean_reversion",
+      "downtrend": "alpha_downtrend_flat",
+      "high_vol": "alpha_high_vol_defensive"
+    },
+    "filters": ["high volatility is handled as a separate regime"],
+    "exit_policy": ["exit or reduce exposure when regime turns downtrend/high_vol"],
+    "position_mapper": "regime-specific max target_S with daily change limit",
+    "state_rules": ["max_daily_target_change"]
+  },
+  "alpha_structure": {
+    "type": "regime_switching_multitimeframe",
+    "max_regimes": 4,
+    "max_alpha_per_regime": 1,
+    "horizons": ["long_window", "mid_window", "short_window"],
+    "requires_distinct_alpha_per_core_regime": true
+  },
+  "primary_metric": "sharpe"
+}

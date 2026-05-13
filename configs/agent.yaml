@@ -1,0 +1,91 @@
+agents:
+  context_windows:
+    deepseek:
+      provider: deepseek
+      effective_max_input_tokens: 600000
+      notes: Conservative effective input window for DeepAgents context compression. deepseek-v4-pro supports a larger vendor context window.
+    kimi:
+      provider: moonshot
+      effective_max_input_tokens: 200000
+      notes: Conservative effective input window for DeepAgents context compression. Adjust if your selected Kimi model supports a different context window.
+  data_agent:
+    enabled: true
+    implementation: deepagents
+    tool_timeout_seconds: 604800
+    thinking: enabled
+  strategy_agent:
+    enabled: true
+    implementation: deepagents
+    tool_timeout_seconds: 604800
+    max_strategy_iterations: 25
+    provider: ${SIGNAL_AGENT_PROVIDER:deepseek}
+    base_url: ${SIGNAL_AGENT_BASE_URL:https://api.deepseek.com}
+    api_key: ${SIGNAL_AGENT_API_KEY:}
+    model: ${SIGNAL_AGENT_MODEL:deepseek-v4-pro}
+    thinking: ${SIGNAL_AGENT_THINKING:enabled}
+    reasoning_effort: ${SIGNAL_AGENT_REASONING_EFFORT:high}
+  budget_agent:
+    enabled: true
+    implementation: deepagents
+    provider: ${BUDGET_AGENT_PROVIDER:deepseek}
+    base_url: ${BUDGET_AGENT_BASE_URL:https://api.deepseek.com}
+    api_key: ${BUDGET_AGENT_API_KEY:}
+    model: ${BUDGET_AGENT_MODEL:deepseek-v4-pro}
+    tool_timeout_seconds: 604800
+    thinking: ${BUDGET_AGENT_THINKING:enabled}
+    reasoning_effort: ${BUDGET_AGENT_REASONING_EFFORT:high}
+  portfolio_agent:
+    enabled: true
+    implementation: deepagents
+    provider: ${PORTFOLIO_AGENT_PROVIDER:deepseek}
+    base_url: ${PORTFOLIO_AGENT_BASE_URL:https://api.deepseek.com}
+    api_key: ${PORTFOLIO_AGENT_API_KEY:}
+    model: ${PORTFOLIO_AGENT_MODEL:deepseek-v4-pro}
+    tool_timeout_seconds: 604800
+    thinking: ${PORTFOLIO_AGENT_THINKING:enabled}
+    reasoning_effort: ${PORTFOLIO_AGENT_REASONING_EFFORT:high}
+  portfolio_signal_profile:
+    enabled: true
+    implementation: service_llm
+    provider: ${PORTFOLIO_SIGNAL_PROFILE_PROVIDER:deepseek}
+    base_url: ${PORTFOLIO_SIGNAL_PROFILE_BASE_URL:https://api.deepseek.com}
+    api_key: ${PORTFOLIO_SIGNAL_PROFILE_API_KEY:}
+    model: ${PORTFOLIO_SIGNAL_PROFILE_MODEL:deepseek-v4-pro}
+    thinking: ${PORTFOLIO_SIGNAL_PROFILE_THINKING:enabled}
+    reasoning_effort: ${PORTFOLIO_SIGNAL_PROFILE_REASONING_EFFORT:high}
+  portfolio_critic_agent:
+    enabled: true
+    implementation: deepagents
+    provider: ${PORTFOLIO_CRITIC_AGENT_PROVIDER:}
+    base_url: ${PORTFOLIO_CRITIC_AGENT_BASE_URL:}
+    api_key: ${PORTFOLIO_CRITIC_AGENT_API_KEY:}
+    model: ${PORTFOLIO_CRITIC_AGENT_MODEL:}
+    tool_timeout_seconds: 604800
+    thinking: ${PORTFOLIO_CRITIC_AGENT_THINKING:}
+    reasoning_effort: ${PORTFOLIO_CRITIC_AGENT_REASONING_EFFORT:}
+  llm:
+    provider: deepseek
+    base_url: ${DEEPSEEK_BASE_URL:https://api.deepseek.com}
+    api_key: ${DEEPSEEK_API_KEY:}
+    model: ${DEEPSEEK_MODEL:deepseek-v4-pro}
+    thinking: ${DEEPSEEK_THINKING:enabled}
+    reasoning_effort: ${DEEPSEEK_REASONING_EFFORT:high}
+  critic_agent:
+    enabled: true
+    implementation: deepagents
+    provider: ${CRITIC_AGENT_PROVIDER:deepseek}
+    base_url: ${CRITIC_AGENT_BASE_URL:https://api.deepseek.com}
+    api_key: ${CRITIC_AGENT_API_KEY:}
+    model: ${CRITIC_AGENT_MODEL:deepseek-v4-pro}
+    tool_timeout_seconds: 604800
+    thinking: ${CRITIC_AGENT_THINKING:enabled}
+  budget_critic_agent:
+    enabled: true
+    implementation: deepagents
+    provider: ${BUDGET_CRITIC_AGENT_PROVIDER:}
+    base_url: ${BUDGET_CRITIC_AGENT_BASE_URL:}
+    api_key: ${BUDGET_CRITIC_AGENT_API_KEY:}
+    model: ${BUDGET_CRITIC_AGENT_MODEL:}
+    tool_timeout_seconds: 604800
+    thinking: ${BUDGET_CRITIC_AGENT_THINKING:}
+    reasoning_effort: ${BUDGET_CRITIC_AGENT_REASONING_EFFORT:}

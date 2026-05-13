@@ -1,0 +1,17 @@
+safety:
+  allowed_write_roots:
+    - artifacts/experiments
+    - artifacts/strategy_registry
+  forbidden_imports:
+    - os
+    - subprocess
+    - socket
+    - requests
+    - urllib
+    - pickle
+  forbidden_calls:
+    - eval
+    - exec
+    - compile
+    - __import__
+

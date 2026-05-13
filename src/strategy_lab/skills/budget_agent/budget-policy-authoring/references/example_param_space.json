@@ -1,0 +1,42 @@
+{
+  "search_method_hint": "ga",
+  "max_candidates_hint": 80,
+  "params": {
+    "universe_gate.gates[1].params.window": {
+      "type": "int",
+      "choices": [40, 60, 120]
+    },
+    "asset_scorer.scorers[0].params.windows": {
+      "type": "choice",
+      "choices": [[20, 60, 120], [40, 120, 252]]
+    },
+    "allocation_engine.params.top_k": {
+      "type": "int",
+      "min": 3,
+      "max": 6,
+      "step": 1
+    },
+    "constraint_projector.params.max_holding_count": {
+      "type": "int",
+      "min": 3,
+      "max": 6,
+      "step": 1
+    },
+    "constraint_projector.params.max_asset_weight": {
+      "type": "float",
+      "choices": [0.15, 0.2, 0.25, 0.3]
+    },
+    "constraint_projector.params.gross_exposure": {
+      "type": "float",
+      "choices": [0.6, 0.8, 1.0]
+    },
+    "rebalance_scheduler.params.rebalance_days": {
+      "type": "int",
+      "choices": [1, 5, 10, 20]
+    },
+    "risk_overlay.overlays[0].params.max_daily_turnover": {
+      "type": "float",
+      "choices": [0.2, 0.4, 0.6]
+    }
+  }
+}

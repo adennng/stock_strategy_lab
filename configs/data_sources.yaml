@@ -1,0 +1,7 @@
+data_sources:
+  miniqmt:
+    enabled: true
+    userdata: ${QMT_USERDATA:}
+    account_id: ${QMT_ACCOUNT_ID:}
+  akshare:
+    enabled: true

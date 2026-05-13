@@ -1,0 +1,4 @@
+qmt:
+  userdata: ${QMT_USERDATA:}
+  account_id: ${QMT_ACCOUNT_ID:}
+  account_type: ${QMT_ACCOUNT_TYPE:STOCK}

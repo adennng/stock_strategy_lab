@@ -1,0 +1,8 @@
+backtest:
+  initial_cash: 1000000
+  commission: 0.0003
+  slippage_perc: 0.0001
+  allow_short: false
+  benchmark_symbol: 000300.SH
+  generate_report: false
+  report_level: none

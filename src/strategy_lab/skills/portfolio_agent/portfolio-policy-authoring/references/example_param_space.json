@@ -1,0 +1,82 @@
+{
+  "target_gross": {
+    "type": "float",
+    "default": 0.65,
+    "min": 0.35,
+    "max": 0.9,
+    "step": 0.05,
+    "description": "基础融合策略的目标总仓位。"
+  },
+  "max_gross": {
+    "type": "float",
+    "default": 0.85,
+    "min": 0.6,
+    "max": 1.0,
+    "step": 0.05,
+    "description": "组合最大总仓位。"
+  },
+  "max_weight": {
+    "type": "float",
+    "default": 0.25,
+    "min": 0.15,
+    "max": 0.35,
+    "step": 0.05,
+    "description": "单资产最大权重。"
+  },
+  "alpha_budget": {
+    "type": "float",
+    "default": 0.8,
+    "min": 0.3,
+    "max": 2.0,
+    "step": 0.1,
+    "description": "预算层证据权重。"
+  },
+  "beta_signal": {
+    "type": "float",
+    "default": 1.0,
+    "min": 0.3,
+    "max": 2.0,
+    "step": 0.1,
+    "description": "信号层证据权重。"
+  },
+  "gamma_vol": {
+    "type": "float",
+    "default": 0.4,
+    "min": 0.0,
+    "max": 1.5,
+    "step": 0.1,
+    "description": "近期波动惩罚强度。"
+  },
+  "signal_floor": {
+    "type": "float",
+    "default": 0.08,
+    "min": 0.0,
+    "max": 0.25,
+    "step": 0.02,
+    "description": "信号转换下限，用于避免信号层过度压低仓位。"
+  },
+  "signal_power": {
+    "type": "float",
+    "default": 1.0,
+    "min": 0.5,
+    "max": 2.0,
+    "step": 0.1,
+    "description": "信号强弱差异放大或压缩。"
+  },
+  "rebalance_speed": {
+    "type": "float",
+    "default": 0.6,
+    "min": 0.2,
+    "max": 1.0,
+    "step": 0.1,
+    "description": "每日向目标仓位靠拢的速度。"
+  },
+  "max_turnover_per_day": {
+    "type": "float",
+    "default": 0.35,
+    "min": 0.1,
+    "max": 0.6,
+    "step": 0.05,
+    "description": "每日最大组合换手。"
+  }
+}

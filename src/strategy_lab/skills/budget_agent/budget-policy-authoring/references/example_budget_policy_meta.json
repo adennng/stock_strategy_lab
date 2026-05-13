@@ -1,0 +1,24 @@
+{
+  "policy_name": "example_multi_window_momentum_topk",
+  "policy_version": "0.1.0",
+  "created_by": "BudgetAgent",
+  "policy_mode": "structured_config",
+  "uses_signal_layer": false,
+  "uses_explicit_groups": false,
+  "exploration_stage": "stage_1_family_exploration",
+  "strategy_family": "risk_adjusted_rotation",
+  "profile_fit": [
+    "资产池存在横截面强弱分化",
+    "资产波动差异较明显"
+  ],
+  "user_preference_fit": [
+    "兼顾收益和 Sharpe",
+    "控制单资产过度集中"
+  ],
+  "profile_preference_conflicts": [],
+  "complexity_level": "medium",
+  "created_at": "YYYY-MM-DDTHH:MM:SS",
+  "notes": [
+    "示例文件仅用于说明结构，实际策略应根据 budget_profile 调整。"
+  ]
+}

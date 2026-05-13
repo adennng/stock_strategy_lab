@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.2.0",
+  "version_id": "v001_initial_fusion",
+  "created_at": "YYYY-MM-DDTHH:MM:SS",
+  "version_role": "initial_script_fusion",
+  "source_version_id": null,
+  "fusion_policy_path": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/fusion_policy.py",
+  "fusion_policy_spec_path": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/fusion_policy_spec.md",
+  "param_space_path": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/param_space.json",
+  "fusion_policy_meta_path": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/fusion_policy_meta.json",
+  "optional_daily_agent_files": {
+    "daily_agent_prompt_path": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/daily_portfolio_agent_prompt.md",
+    "daily_decision_contract_path": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/daily_decision_contract.json",
+    "daily_override_scenarios_path": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/daily_override_scenarios.md"
+  },
+  "budget": {
+    "budget_policy_dir": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/budget_policy",
+    "budget_policy_config_path": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/budget_policy/budget_policy_config.json"
+  },
+  "signals": [
+    {
+      "symbol": "512880.SH",
+      "signal_strategy_dir": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/signal_strategies/512880_SH",
+      "strategy_path": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/signal_strategies/512880_SH/strategy.py",
+      "strategy_spec_path": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/signal_strategies/512880_SH/strategy_spec.md",
+      "param_space_path": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/signal_strategies/512880_SH/param_space.json",
+      "strategy_meta_path": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/signal_strategies/512880_SH/strategy_meta.json",
+      "strategy_params_path": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/signal_strategies/512880_SH/strategy_params.json"
+    }
+  ],
+  "evaluation_dir": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/evaluation",
+  "review_dir": "artifacts/portfolio_runs/{portfolio_run_id}/versions/v001_initial_fusion/review",
+  "notes": "组合层脚本型融合策略版本。预算层和信号层文件仅作为快照保存在当前版本目录，默认不修改。DailyPortfolioAgent 三件套通常只在最终候选版确定后生成。"
+}

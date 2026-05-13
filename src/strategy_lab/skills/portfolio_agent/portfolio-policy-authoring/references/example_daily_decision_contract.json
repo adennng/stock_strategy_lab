@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "allowed_actions": ["PASS", "ADJUST"],
+  "default_action": "PASS",
+  "constraints": {
+    "long_only": true,
+    "allow_leverage": false,
+    "max_gross": 1.0,
+    "max_asset_weight": 0.3,
+    "max_single_asset_deviation": 0.05,
+    "max_total_deviation": 0.15,
+    "max_turnover_from_previous": 0.4,
+    "require_triggered_scenario_for_adjust": true,
+    "require_reason_for_adjust": true
+  },
+  "required_output_fields": [
+    "date",
+    "action",
+    "triggered_scenarios",
+    "final_weights",
+    "adjustments",
+    "risk_checks",
+    "reason"
+  ],
+  "risk_checks": [
+    "gross_exposure",
+    "max_asset_weight_ok",
+    "max_single_asset_deviation_ok",
+    "max_total_deviation_ok",
+    "turnover_ok"
+  ],
+  "notes": "DailyPortfolioAgent 默认 PASS。只有触发 daily_override_scenarios.md 中的场景且证据充分时，才允许有限 ADJUST。"
+}

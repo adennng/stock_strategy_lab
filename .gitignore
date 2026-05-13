@@ -1,0 +1,43 @@
+# Local secrets and machine-specific configuration
+.env
+.env.*
+!.env.example
+
+# Generated runtime outputs
+artifacts/*
+!artifacts/.gitkeep
+conversation_history/
+logs/
+*.log
+*.trace.json
+
+# Large generated data files
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.csv.gz
+*.xlsx
+
+# Local databases and checkpoints
+*.db
+*.sqlite
+*.sqlite3
+*.duckdb
+
+# Python cache/build outputs
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+build/
+dist/
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

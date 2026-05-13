@@ -1,0 +1,17 @@
+budget:
+  default_mode: standalone
+  default_pool_name: custom
+  max_strategy_iterations: 20
+  benchmark: equal_weight_rebalance
+  benchmark_options:
+    - equal_weight_rebalance
+    - equal_weight_buy_hold
+    - simple_momentum_topk
+    - cash
+  backtest:
+    initial_cash: 100000
+    commission: 0.0001
+    slippage_perc: 0.0001
+    execution_price: close
+    allow_short: false
+    same_day_sell_cash_available_for_buy: false

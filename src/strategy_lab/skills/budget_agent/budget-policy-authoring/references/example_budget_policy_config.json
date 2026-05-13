@@ -1,0 +1,101 @@
+{
+  "policy_name": "example_multi_window_momentum_topk",
+  "policy_version": "0.1.0",
+  "universe_gate": {
+    "gates": [
+      {
+        "type": "data_availability_gate",
+        "params": {
+          "min_history_days": 120,
+          "max_recent_missing_days": 0,
+          "require_current_bar": true
+        }
+      },
+      {
+        "type": "absolute_momentum_gate",
+        "params": {
+          "window": 60,
+          "threshold": 0.0
+        }
+      }
+    ]
+  },
+  "asset_scorer": {
+    "scorers": [
+      {
+        "type": "multi_window_momentum",
+        "weight": 0.6,
+        "params": {
+          "windows": [20, 60, 120],
+          "weights": [0.3, 0.4, 0.3]
+        }
+      },
+      {
+        "type": "risk_adjusted_momentum",
+        "weight": 0.4,
+        "params": {
+          "momentum_window": 60,
+          "vol_window": 20,
+          "vol_floor": 0.03
+        }
+      }
+    ],
+    "normalization": "rank_pct"
+  },
+  "allocation_engine": {
+    "type": "topk_score_weighted",
+    "params": {
+      "top_k": 4,
+      "score_floor": 0.0,
+      "power": 1.0
+    }
+  },
+  "risk_overlay": {
+    "overlays": [
+      {
+        "type": "turnover_cap",
+        "params": {
+          "max_daily_turnover": 0.4,
+          "redistribute_remaining": false
+        }
+      },
+      {
+        "type": "budget_smoothing",
+        "params": {
+          "smooth": 0.3
+        }
+      }
+    ]
+  },
+  "rebalance_scheduler": {
+    "type": "every_n_days_with_threshold",
+    "params": {
+      "rebalance_days": 5,
+      "min_weight_change": 0.05,
+      "min_total_turnover": 0.1
+    }
+  },
+  "constraint_projector": {
+    "type": "long_only_cap_normalize",
+    "params": {
+      "gross_exposure": 0.8,
+      "max_asset_weight": 0.25,
+      "min_weight": 0.02,
+      "max_holding_count": 4,
+      "renormalize_after_clip": true,
+      "rounding_digits": 6
+    }
+  },
+  "diagnostics": {
+    "enabled": true,
+    "params": {
+      "save_daily_scores": true,
+      "save_gate_results": true,
+      "save_raw_weights": true,
+      "save_final_weights": true,
+      "save_turnover": true,
+      "save_constraint_events": true,
+      "save_reason_text": false
+    }
+  }
+}

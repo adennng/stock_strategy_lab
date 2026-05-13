@@ -1,0 +1,20 @@
+{
+  "version_id": "v001_initial_fusion",
+  "policy_name": "signal_direct_baseline",
+  "policy_class_name": "PortfolioFusionPolicy",
+  "created_by": "PortfolioAgent",
+  "policy_mode": "script_fusion_policy",
+  "source_profile_path": "profile/portfolio_profile.json",
+  "source_signal_profile_path": "signal_profiles/signal_profiles.json",
+  "primary_files": {
+    "fusion_policy": "fusion_policy.py",
+    "fusion_spec": "fusion_policy_spec.md",
+    "param_space": "param_space.json"
+  },
+  "optional_final_review_files": {
+    "daily_agent_prompt": "daily_portfolio_agent_prompt.md",
+    "daily_decision_contract": "daily_decision_contract.json",
+    "daily_override_scenarios": "daily_override_scenarios.md"
+  },
+  "notes": "第一轮信号层直用基线。基础策略由 fusion_policy.py 机械执行；DailyPortfolioAgent 三件套通常在最终候选版确定后再生成。"
+}
