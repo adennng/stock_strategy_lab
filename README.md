@@ -241,7 +241,9 @@ PORTFOLIO_CRITIC_AGENT_MODEL=
 
 ## 快速开始
 
-**更详细的分场景使用说明请看：[Stock Strategy Lab 场景使用说明](usage_scenarios.md)。**如下仅做简要说明：
+**更详细的分场景使用说明请看：[Stock Strategy Lab 场景使用说明](usage_scenarios.md)。**
+
+如下仅做简要说明：
 
 检查配置：
 
