@@ -63,6 +63,116 @@ python -m strategy_lab.cli init
 python -m strategy_lab.cli config
 ```
 
+### 0.5 配置文件说明
+
+项目里有两类配置：一类是本机私密配置，放在 `.env`；另一类是项目默认配置，放在 `configs/` 目录。
+
+`.env` 是本机运行时配置，通常由 `.env.example` 复制而来。它不应该提交到 GitHub。这里主要填写大模型 API Key、模型地址、MiniQMT 本地路径和账号等内容。
+
+常见可改项：
+
+```text
+DEEPSEEK_API_KEY / DEEPSEEK_BASE_URL / DEEPSEEK_MODEL
+MOONSHOT_API_KEY / MOONSHOT_BASE_URL / MOONSHOT_MODEL
+QMT_USERDATA / QMT_ACCOUNT_ID
+SIGNAL_AGENT_* / BUDGET_AGENT_* / PORTFOLIO_AGENT_*
+CRITIC_AGENT_* / BUDGET_CRITIC_AGENT_* / PORTFOLIO_CRITIC_AGENT_*
+```
+
+如果只想统一使用一个模型，优先填写通用模型配置即可。如果想让不同智能体使用不同模型，可以单独填写对应智能体的变量。例如：信号层用 DeepSeek，复盘智能体用 Kimi，预算层继续用 DeepSeek。
+
+`configs/agent.yaml` 是智能体配置。它定义各个智能体默认使用哪个 provider、base_url、model、thinking、reasoning_effort、工具超时时间、上下文压缩阈值等。
+
+常见可改项：
+
+```text
+agents.strategy_agent.max_strategy_iterations
+agents.budget_agent.tool_timeout_seconds
+agents.portfolio_agent.tool_timeout_seconds
+agents.context_windows.deepseek.effective_max_input_tokens
+agents.context_windows.kimi.effective_max_input_tokens
+```
+
+说明：
+
+- `max_strategy_iterations` 控制信号层默认探索轮数，终端运行时也可以通过命令参数或自然语言要求覆盖。
+- `tool_timeout_seconds` 控制工具执行的最长等待时间。量化回测和多智能体任务可能很久，通常不建议设太短。
+- `effective_max_input_tokens` 是 DeepAgents 上下文压缩的参考阈值，不是模型厂商真实最大上下文。模型变更后可以按模型上下文能力保守调整。
+
+`configs/backtest.yaml` 是通用回测默认配置，主要用于信号层或通用回测服务。
+
+常见可改项：
+
+```text
+initial_cash      初始资金
+commission        手续费率
+slippage_perc     滑点
+allow_short       是否允许做空
+benchmark_symbol  默认基准
+generate_report   默认是否生成报告
+```
+
+注意：单次任务也可以在命令行或 run_state 里覆盖这些默认值。也就是说，配置文件给的是默认值，具体某次实验可以单独改。
+
+`configs/budget.yaml` 是预算层默认配置。它包含预算层默认模式、默认资产池名称、预算层最大探索轮数、基准类型、预算层回测设置等。
+
+常见可改项：
+
+```text
+max_strategy_iterations
+benchmark
+benchmark_options
+backtest.initial_cash
+backtest.commission
+backtest.slippage_perc
+backtest.execution_price
+```
+
+其中 `benchmark_options` 是预算层可选基准，例如等权定期再平衡、等权买入持有、简单动量 TopK、现金等。预算层最终使用哪个基准，可以由智能体根据任务要求选择，也可以由用户在对话中指定。
+
+`configs/data_sources.yaml` 是数据源开关配置。当前主要包括：
+
+```text
+data_sources.miniqmt.enabled
+data_sources.akshare.enabled
+```
+
+通常优先使用 MiniQMT，其次使用 AKShare。若本机没有打开 QMT 客户端，MiniQMT 相关调用可能失败，智能体会尝试根据任务情况切换数据源或提示用户。
+
+`configs/qmt.yaml` 是 MiniQMT / xtquant 相关配置。它从 `.env` 读取：
+
+```text
+QMT_USERDATA
+QMT_ACCOUNT_ID
+QMT_ACCOUNT_TYPE
+```
+
+如果更换券商客户端目录、账号或账号类型，就改 `.env`，一般不直接改这个 yaml。
+
+`configs/app.yaml` 是项目运行目录和日志配置。
+
+常见可改项：
+
+```text
+project.artifacts_dir
+project.default_timezone
+logging.level
+```
+
+除非你想把所有运行产物放到别的目录，否则一般不需要改。
+
+`configs/safety.yaml` 是策略脚本安全检查配置。它定义策略脚本允许写入的位置、禁止导入的模块、禁止调用的函数等。
+
+一般不建议随便放宽这些限制。LLM 会自动写策略脚本，安全配置可以减少策略脚本误读写系统文件、执行网络请求或调用危险函数的风险。如果你明确要扩展策略脚本能力，再有针对性地调整。
+
+配置修改建议：
+
+- 改模型、API Key、本地 QMT 路径：优先改 `.env`。
+- 改默认探索轮数、上下文压缩阈值、工具超时：改 `configs/agent.yaml`。
+- 改手续费、滑点、初始资金、基准：改 `configs/backtest.yaml` 或 `configs/budget.yaml`。
+- 改策略搜索范围、策略类型、智能体工作方式：不要优先改配置文件，应改对应 skill 的 `SKILL.md` 或 references 文档。
+- 改某一次具体实验：优先在终端对话里告诉智能体，让它写入本次任务目录的状态文件和策略文件。
+
 ## 1. 总体运行逻辑
 
 Stock Strategy Lab 的每一层都不是简单跑一次脚本，而是一个智能体闭环：
@@ -981,4 +1091,3 @@ artifacts/signal_runs
 ### 10.6 artifacts 目录要提交到 GitHub 吗？
 
 不建议。`artifacts/` 是本地运行产物目录，可能包含数据、日志、策略结果和账号相关信息，默认应该被 `.gitignore` 忽略。
-
